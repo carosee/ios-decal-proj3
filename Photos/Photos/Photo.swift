@@ -9,17 +9,23 @@
 import Foundation
 
 class Photo {
-    /* The number of likes the photo has. */
     var likes : Int!
-    /* The string of the url to the photo file. */
-    var url : String!
-    /* The username of the photographer. */
     var username : String!
+    var thumbURL : String!
+    var standardURL : String!
+    var date : String!
+    var liked : Bool!
 
     /* Parses a NSDictionary and creates a photo object. */
     init (data: NSDictionary) {
         // FILL ME IN
         // HINT: use nested .valueForKey() calls, and then cast using 'as! TYPE'
+        username = data.valueForKey("user")?.valueForKey("username") as! String
+        likes = data.valueForKey("likes")?.valueForKey("count") as! Int
+        thumbURL = data.valueForKey("images")?.valueForKey("thumbnail")?.valueForKey("url") as! String
+        standardURL = data.valueForKey("images")?.valueForKey("standard_resolution")?.valueForKey("url") as! String
+        date = data.valueForKey("created_time") as! String
+        liked = false
     }
 
 }
